@@ -35,15 +35,20 @@ def displayCars(conn, where=None):
     try:
         cursor = conn.cursor()
         cursor.execute(query)
-        for row in cursor:
-            print(f'''
-            Make            {row[1]}
-            Model           {row[2]}
-            Year            {row[3]}
-            Color           {row[4]}
-            Price           {row[5]}
-            ''')
-        cursor.close()
+        if query.find('car_id') == -1:
+            for row in cursor:
+                print(f'''
+                ID              {row[0]}
+                Make            {row[1]}
+                Model           {row[2]}
+                Year            {row[3]}
+                Color           {row[4]}
+                Price           {row[5]}
+                ''')
+            cursor.close()
+        else:
+            for row in cursor:
+                return row
     except(Exception, mysql.connector.Error) as error:
         print('Error while fetching data from MySQL', error)
 
@@ -83,6 +88,26 @@ def searchCar(make=None, model=None, year=None, color=None):
     displayCars(conn, where_string)
 
     conn.close()
+
+def selectCar(car_id=None):
+    # Function to break down the list of total cars for
+    # viewing based on the passed params.
+
+    if car_id is not None:
+        where_string = " WHERE car_id = {}".format(car_id)
+        conn = c.returnConnection()
+        car_info = displayCars(conn, where_string)
+        conn.close()
+        return car_info
+
+def finalPricing(carList):
+        subtotal = 0
+        for car in carList:
+            subtotal += car.getPrice()
+    
+        salesTax = subtotal * 0.06
+        print('Sales Tax = ${}'.format(salesTax))
+        total = subtotal + salesTax
 
 # #NEEDED FOR TESTING ========================
 # make = 'Honda'

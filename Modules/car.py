@@ -31,12 +31,3 @@ class Car:
     def getPrice(self):
         return self.price
     
-    subtotal = 0
-for car in list_of_cars:
-    subtotal += car.price
-    cars.getprice()
-    
-salesTax = subtotal * 0.06
-print('Sales Tax = ${}'.format(salesTax))
-
-total_car_amount = (subtotal + salesTax)
