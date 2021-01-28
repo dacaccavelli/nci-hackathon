@@ -101,6 +101,7 @@ def selectCar(car_id=None):
 
 
 def totalPrice(carList):
+        
         subtotal = 0
         for car in carList:
             subtotal += car.getPrice()
