@@ -9,22 +9,24 @@ CREATE TABLE car_dealership
 )
 
 INSERT INTO car_dealership (car_make, car_model, car_year, car_color, car_price) VAlUES
-('Honda', 'Pilot', '2020', 'Black', 32,550.99)
+('Honda', 'Pilot', '2020', 'Black', 32,770.99)
 ('Honda', 'Accord', '2019', 'Black', 24,970.99)
 ('Honda', 'Civic', '2018', 'Black', 21,250)
-('Honda', 'Ridgeline', '2017', 'Black', 33,900)
+('Honda', 'Ridgeline', '2017', 'Black', 29,900)
 
-('Honda', 'Pilot', '2019', 'Red', 32,550.99)
-('Honda', 'Accord', '2018', 'Red', 24,970.99)
+('Honda', 'Pilot', '2019', 'Red', 30,570.99)
+('Honda', 'Accord', '2018', 'Red', 19,970.99)
 ('Honda', 'Civic', '2017', 'Red', 21,250)
-('Honda', 'Ridgeline', '2018', 'Red', 33,900)
+('Honda', 'Ridgeline', '2018', 'Red', 31,900)
 
-('Honda', 'Pilot', '2018', 'Grey', 32,550.99)
-('Honda', 'Accord', '2017', 'Grey', 24,970.99)
-('Honda', 'Civic', '2019', 'Grey', 21,250)
-('Honda', 'Ridgeline', '2020', 'Grey', 33,900)
+('Honda', 'Pilot', '2018', 'Grey', 29,650.99)
+('Honda', 'Accord', '2017', 'Grey', 18,570.99)
+('Honda', 'Civic', '2019', 'Grey', 20,505)
+('Honda', 'Ridgeline', '2020', 'Grey', 35,020)
 
-('Honda', 'Pilot', '2017', 'Blue', 32,550.99)
-('Honda', 'Accord', '2019', 'Blue', 24,970.99)
-('Honda', 'Civic', '2020', 'Blue', 21,250)
+('Honda', 'Pilot', '2017', 'Blue', 27,550.99)
+('Honda', 'Accord', '2020', 'Blue', 25,225.99)
+('Honda', 'Civic', '2020', 'Blue', 20,955)
 ('Honda', 'Ridgeline', '2019', 'Blue', 33,900)
+
+SELECT * FROM car_dealership
