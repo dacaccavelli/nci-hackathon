@@ -9,24 +9,55 @@ CREATE TABLE car_dealership
 )
 
 INSERT INTO car_dealership (car_make, car_model, car_year, car_color, car_price) VAlUES
-('Honda', 'Pilot', '2020', 'Black', 32,770.99)
-('Honda', 'Accord', '2019', 'Black', 24,970.99)
-('Honda', 'Civic', '2018', 'Black', 21,250)
-('Honda', 'Ridgeline', '2017', 'Black', 29,900)
+('Honda', 'Pilot', '2020', 'Black', 32770.99),
+('Honda', 'Accord', '2019', 'Black', 24970.99),
+('Honda', 'Civic', '2018', 'Black', 21250.99),
+('Honda', 'Ridgeline', '2017', 'Black', 29900.99),
 
-('Honda', 'Pilot', '2019', 'Red', 30,570.99)
-('Honda', 'Accord', '2018', 'Red', 19,970.99)
-('Honda', 'Civic', '2017', 'Red', 21,250)
-('Honda', 'Ridgeline', '2018', 'Red', 31,900)
+('Honda', 'Pilot', '2019', 'Red', 30570.99),
+('Honda', 'Accord', '2018', 'Red', 19970.99),
+('Honda', 'Civic', '2017', 'Red', 21250.99),
+('Honda', 'Ridgeline', '2018', 'Red', 31900.99),
 
-('Honda', 'Pilot', '2018', 'Grey', 29,650.99)
-('Honda', 'Accord', '2017', 'Grey', 18,570.99)
-('Honda', 'Civic', '2019', 'Grey', 20,505)
-('Honda', 'Ridgeline', '2020', 'Grey', 35,020)
+('Honda', 'Pilot', '2018', 'Grey', 29650.99),
+('Honda', 'Accord', '2017', 'Grey', 18570.99),
+('Honda', 'Civic', '2019', 'Grey', 20505.99),
+('Honda', 'Ridgeline', '2020', 'Grey', 35020.99),
 
-('Honda', 'Pilot', '2017', 'Blue', 27,550.99)
-('Honda', 'Accord', '2020', 'Blue', 25,225.99)
-('Honda', 'Civic', '2020', 'Blue', 20,955)
-('Honda', 'Ridgeline', '2019', 'Blue', 33,900)
+('Honda', 'Pilot', '2017', 'Blue', 27,550.99),
+('Honda', 'Accord', '2020', 'Blue', 25225.99),
+('Honda', 'Civic', '2020', 'Blue', 20955.99),
+('Honda', 'Ridgeline', '2019', 'Blue', 33900.99),
 
-SELECT * FROM car_dealership
+('Honda', 'Pilot', '2017', 'White', 27550.99),
+('Honda', 'Accord', '2020', 'White', 25225.99),
+('Honda', 'Civic', '2020', 'White', 20955.99),
+('Honda', 'Ridgeline', '2019', 'White', 33900.99),
+
+('Toyota', 'Highlander', '2020', 'Blue', 34910.99),
+('Toyota', 'Camry', '2019', 'Blue', 22970.99),
+('Toyota', 'Corolla', '2018', 'Blue', 18025.99),
+('Toyota', 'Tacoma', '2017', 'Blue', 24250.99),
+
+('Toyota', 'Highlander', '2019', 'Black', 32910.99),
+('Toyota', 'Camry', '2018', 'Black', 24970.99),
+('Toyota', 'Corolla', '2017', 'Black', 20025.99),
+('Toyota', 'Tacoma', '2020', 'Black', 26250.99),
+
+('Toyota', 'Highlander', '2018', 'Red', 31910.99),
+('Toyota', 'Camry', '2017', 'Red', 20970.99),
+('Toyota', 'Corolla', '2019', 'Red', 19025.99),
+('Toyota', 'Tacoma', '2019', 'Red', 24250.99),
+
+('Toyota', 'Highlander', '2017', 'Grey', 30910.99),
+('Toyota', 'Camry', '2020', 'Grey', 24970.99),
+('Toyota', 'Corolla', '2020', 'Grey', 20025.99),
+('Toyota', 'Tacoma', '2018', 'Grey', 23250.99),
+
+('Toyota', 'Highlander', '2020', 'White', 34910.99),
+('Toyota', 'Camry', '2020', 'White', 24970.99),
+('Toyota', 'Corolla', '2020', 'White', 20025.99),
+('Toyota', 'Tacoma', '2020', 'White', 26250.99)
+
+
+SELECT * FROM car_dealership 
