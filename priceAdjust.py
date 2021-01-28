@@ -18,7 +18,12 @@ def discountCalc(n1, n2):
 # if car is black
 print(discountCalc(20000, .25)) # discount if black
 
-# if customer is veteran
-print(discountCalc(20000, .25)) # discount if veteran
+# if car is white
+print(discountCalc(20000, .02)) # discount if white
 
-#print (discountCalc(20000, .725))
+# if customer is veteran
+#print (discountCalc(20000, .725)) # discount if veteran
+
+#if MSRP
+print (discountCalc(20000)) # MSRP
+
