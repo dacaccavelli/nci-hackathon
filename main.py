@@ -5,54 +5,83 @@ import Modules.colors as clr
 
 functions.clear()
 # Taking customers' main information
-print ("Welcome To XX Dealership! To better assist you, please help answer the below questions")
+veteranBool=False
+print ("Welcome To Continental Auto Dealers! To better assist you, please help answer the below questions")
 first_name=input("Enter First Name: ")
 last_name =input("Enter Last Name: " )
 zip_code = input ("Enter your Zip Code: ")
-
-veteran = False 
-# ask veteran/disabled
+veteran = input ("Are you a war veteran or disabled? (y/n): ")
+veteran = veteran.lower()
+if veteran == 'y':
+    print("Conratulations you are entitled to a discount")
+    veteranBool = True 
 
 carList = []
+
 while True: 
 
-    functions.clear()
+    makes= [None, 'Honda', 'Toyota']
+    hondaModels = [None, 'Pilot', 'Accord', 'Civic', 'Ridgeline']
+    toyotaModels = [None, 'Highlander', 'Camry', 'Corolla', 'Tacoma']
+    years = [None, '2020', '2019', '2018', '2017']
+    colors = [None, 'Black', 'Red', 'Grey', 'Blue', 'White']
 
     # Collecting customer car preferences
-    car_make = input("Enter Car Make: ")
-    car_model = input("Enter Car Model: ")
-    car_year = input("Enter Car Year: ")
-    car_color = input("Enter Car Color: ")
+    for make in makes:
+        print('{}:   {}'.format(makes.index(make),make))
+    car_make = makes[int(input("Enter Car Make #(0 to skip): "))]
+
+    if car_make == 'Honda':
+        for model in hondaModels:
+            print('{}:   {}'.format(hondaModels.index(model),model))
+        car_model = hondaModels[int(input("Enter Car Model #(0 to skip): "))]
+    elif car_make == 'Toyota':
+        for model in toyotaModels:
+            print('{}:   {}'.format(toyotaModels.index(model),model))
+        car_model = toyotaModels[int(input("Enter Car Model #(0 to skip): "))]
+    else:
+        car_model = None
+        
+    for year in years:
+        print('{}:   {}'.format(years.index(year),year))
+    car_year = years[int(input("Enter Car Year #(0 to skip): "))]
+
+    for color in colors:
+        print('{}:   {}'.format(colors.index(color),color))
+    car_color = colors[int(input("Enter Car Color #(0 to skip): "))]
 
     functions.clear()
-
-    #Testing ==============
-    car_make = 'Honda'
-    car_model = None
-    car_year = None
-    #color = 'Blue'
-    #=====================
 
     print("These are the cars we found:")
     functions.searchCar(car_make, car_model, car_year, car_color)
 
-    print('''   Select the ID corresponding to the car
-            you would like to select.''')
-    selection = input("Enter 0 if you would like to search again: ")
+    print('''     Select the ID corresponding to the car
+     you would like to select.''')
+    selection = input("     Enter 0 if you would like to search again: ")
 
     if selection != '0':
         car_info = functions.selectCar(selection)
-        print(car_info)
-        #functions.priceAdjust(car_info[5], veteran)
-        newcar = carObj.Car(car_info[1], car_info[2], car_info[3], car_info[4], float(car_info[5]))
-        carList.append(newcar)
+        
+        if car_info == None:
+            print("Sorry, we ran into an issue.")
+            input("Press any key to search again.")
+        else:
+            adjustedPrice = functions.priceAdjust(float(car_info[5]), car_info[4], veteranBool)
+            newcar = carObj.Car(car_info[1], car_info[2], car_info[3], car_info[4], adjustedPrice)
+            carList.append(newcar)
+            functions.removeCar(selection)
 
-        clr.prRed("{: >4} {: >11} {: >5} {: >10} {: >10}".format('MAKE', 'MODEL', 'YEAR', 'COLOR', 'PRICE($)'))
-        for car in carList:
-            clr.prCyan("{: >5} {: >10} {: >5} {: >10} {: >10}".format(car.getMake(), car.getModel(), car.getYear(), car.getColor(), car.getPrice()))
-        selection = input("Would you like to choose another car (y/n)?: ")
-        selection = selection.lower()
+            clr.prRed("{: >4} {: >11} {: >5} {: >10} {: >10}".format('MAKE', 'MODEL', 'YEAR', 'COLOR', 'PRICE($)'))
+            for car in carList:
+                clr.prCyan("{: >5} {: >10} {: >5} {: >10} {: >10}".format(car.getMake(), car.getModel(), car.getYear(), car.getColor(), car.getPrice()))
+            
+            selection = input("Would you like to choose another car (y/n)?: ")
+            selection = selection.lower()
 
-        if selection == 'n':
-            functions.totalPrice(carList)
-            break
+            if selection == 'n':
+                functions.totalPrice(carList)
+                print("Thank you for visiting Continental Auto Dealers.")
+                print("Please come again.")
+                break
+
+    functions.clear()
