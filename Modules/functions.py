@@ -1,23 +1,29 @@
 import mysql.connector
 from mysql.connector import connect
-import connection as c
-
-# NEEDED FOR TESTING ============================
+import Modules.connection as c
+import platform
+# # NEEDED FOR TESTING ============================
 import os 
 from os import system 
-import functions as func 
+#import functions as func 
 from colorama import Fore, Back, Style
 from os.path import join, dirname
 from dotenv import load_dotenv
 
-system('cls')
+#system('cls')
 
 # Create .env file under root folder and add the environment variables
 # Saving the path to .env
 dotenv_path = join(dirname(__file__), '../.env')
 # Loading the env variables from the path.
 load_dotenv(dotenv_path)
-# ================================================
+# # ================================================
+
+def clear():
+    if platform.system() == 'Windows':
+        system('cls')
+    else:
+        system('clear')
 
 def displayCars(conn, where=None):
     
@@ -78,9 +84,10 @@ def searchCar(make=None, model=None, year=None, color=None):
 
     conn.close()
 
-make = 'Honda'
-model = None
-year = None
-color = 'Blue'
-
-searchCar(make, model, year, color)
+# #NEEDED FOR TESTING ========================
+# make = 'Honda'
+# model = None
+# year = None
+# color = 'Blue'
+# searchCar(make, model, year, color)
+# # ===========================================
