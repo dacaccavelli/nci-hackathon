@@ -1,3 +1,26 @@
+# NCI Hackathon
+# Goal: Create a Dealership application where you prompt the user to
+#       input the make, model, year, and color of the cars they want.
+#       Prices will vary based on color, year, model, make.
+#       Present the user with different options where they can see the price.
+#       Pass all prices for colors and makes to another method which
+#       calculates the total prices (withtaxes included).
+#       If car is black, the user gets a discount of 25% the price of the car.
+#       If the car is white, the customer receives a bonus of $400 towards
+#       the down   payment.
+#       If the customer is a war veteran or disabled, they receive 25% off the
+#       cost of the car plus $500 bonus.
+#       This returns total price and bonuses to the main file.
+#       Pass the four values (make, model, year, and color) to another method
+#       where you use the values to create objects.
+#       Return the objects to the main file where you will display all of them.
+# Date: 1/29/21
+# Authors:  Andres Mejia
+#           Daniel Caccavelli
+#           John C.
+#           Kylan Roberts
+#           Rachid
+
 import Modules.functions as functions
 import Modules.connection
 import Modules.car as carObj
