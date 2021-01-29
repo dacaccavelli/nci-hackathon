@@ -23,7 +23,7 @@ def clear():
     else:
         system('clear')
 
-def displayCars(conn, where=None):
+def displayCars(app, conn, where=None):
     
     query = "SELECT * FROM car_dealership"
     if where is not None:
@@ -34,14 +34,7 @@ def displayCars(conn, where=None):
         cursor.execute(query)
         if query.find('car_id') == -1:
             for row in cursor:
-                print(f'''
-        ID              {row[0]}
-        Make            {row[1]}
-        Model           {row[2]}
-        Year            {row[3]}
-        Color           {row[4]}
-        Price           {row[5]}
-                ''')
+               app.carListbox.insert(0,"{: >3} {: >6} {: >11} {: >5} {: >10} ${: >8}".format(row[0],row[1], row[2], row[3], row[4], row[5]))
             cursor.close()
         else:
             for row in cursor:
@@ -63,10 +56,18 @@ def removeCar(index):
         print('Error while fetching data from MySQL', error)
 
 
-def searchCar(make=None, model=None, year=None, color=None):
+def searchCar(app, make=None, model=None, year=None, color=None):
     # Function to break down the list of total cars for
     # viewing based on the passed params.
 
+    if make == 'None':
+        make = None
+    if model == 'None':
+        model = None
+    if year == 'None':
+        year = None
+    if color == 'None':
+        color = None
     details = {"car_make": make,
                "car_model": model,
                "car_year": year,
@@ -82,9 +83,9 @@ def searchCar(make=None, model=None, year=None, color=None):
     conn = c.returnConnection()
 
     if len(where_string) == 7:
-        displayCars(conn)
+        displayCars(app, conn)
     else:
-        displayCars(conn, where_string)
+        displayCars(app, conn, where_string)
     conn.close()
 
 
@@ -95,22 +96,23 @@ def selectCar(car_id=None):
     if car_id is not None:
         where_string = " WHERE car_id = {}".format(car_id)
         conn = c.returnConnection()
-        car_info = displayCars(conn, where_string)
+        car_info = displayCars(None, conn, where_string)
         conn.close()
         return car_info
 
 
 def totalPrice(carList):
         
+        childString = ""
         subtotal = 0
         for car in carList:
             subtotal += car.getPrice()
-    
-        print('Subtotal = ${}'.format(subtotal))
-        salesTax = subtotal * 0.06
-        print('Sales Tax = ${}'.format(salesTax))
-        total = subtotal + salesTax
-        print ("Total = ${}".format(total))
+        childString += 'Subtotal = ${}.\n'.format(subtotal)
+        salesTax = round(subtotal * 0.06, 2)
+        childString += 'Sales Tax = ${}.\n'.format(salesTax)
+        total = round(subtotal + salesTax)
+        childString += "Total = ${}.\n".format(total)
+        return childString
 
 
 def discountCalc(n1, n2):
@@ -127,39 +129,45 @@ def priceAdjust(price, color, vet):
     
     # if car is black
     color = color.lower()
+    childString = ""
     if color == 'black': #black car discount
-        print('So that brings your total to $', discountCalc(price, .25))
-        if vet == True:
+        childString += 'So that brings your total to ${}.\n'.format(discountCalc(price, .25))
+        if vet == 1:
             bprice = discountCalc(price, .25)
-            print('Awesome! Thank you for your service. You get a 25% discount.')
-            print('So 25% off of that price is...')
-            print('And a $500 cash bonus!!!')
-            print('So now your price is $', cashbonus(discountCalc(bprice, .25), 500))
+            childString += """
+Awesome! Thank you for your service.
+You get a 25% discount.
+So 25% off of that price is...${}'
+And a $500 cash bonus!!!'
+So now your price is ${}""".format(discountCalc(bprice, .25), cashbonus(discountCalc(bprice, .25), 500))
             baseprice = cashbonus(discountCalc(bprice, .25), 500)
         else: 
-            print('Alright so your total is still at $', discountCalc(price, .25))
+            childString += 'Alright so your total is still at ${}.'.format(discountCalc(price, .25))
             baseprice = discountCalc(price, .25)
     elif color == 'white': # if car is white cash bonus
         wprice= cashbonus(price, 400)
-        if vet == True:
-            print('Awesome! Thank you for your service. You get a 25% discount.')
-            print('So 25% off of that price is...')
-            print('And a $500 cash bonus!!!')
-            print('So now your price is $', cashbonus(cashbonus(discountCalc(price, .25), 500), 400))
+        if vet == 1:
+            childString += """
+Awesome! Thank you for your service.
+You get a 25% discount.
+So 25% off of that price is...${}.
+And a $500 cash bonus!!!
+So now your price is ${}.""".format(cashbonus(discountCalc(price, .25), 400), cashbonus(cashbonus(discountCalc(price, .25), 400), 500))
             baseprice = cashbonus(cashbonus(discountCalc(price, .25), 500), 400)
         else: 
-            print('No worries, with the cash bonus for white cars your price is $', cashbonus(price, 400))
+            childString += 'No worries, with the cash bonus for\nwhite cars your price is ${}.'.format(cashbonus(price, 400))
             baseprice = cashbonus(price, 400)
     else:
-        print('Alright the color is not white or black so unfortunately, no cash bonus')
-        if vet == True:
-            print('Awesome! Thank you for your service. You get a 25% discount.')
-            print('So 25% off of {} is...'.format(price))
-            print('$', discountCalc(price, .25)) # discount if veteran
-            print('And a $500 cash bonus!!!')
-            print('So now your price is $', cashbonus(discountCalc(price, .25), 500))
+        childString += 'Alright the color is not white or black\nso unfortunately, no cash bonus.\n'
+        if vet == 1:
+            childString += """
+Awesome! Thank you for your service.
+You get a 25% discount.
+So 25% off of {} is...${}.
+And a $500 cash bonus!!!
+So now your price is ${}.""".format(price, discountCalc(price, .25), cashbonus(discountCalc(price, .25), 500))
             baseprice = cashbonus(discountCalc(price, .25), 500)
         else:
-            print('No worries, we still offer great prices! Your price is still at ${}.'.format(price))
+            childString += 'No worries, we still offer great prices!\nYour price is still at ${}.'.format(price)
             baseprice = price
-    return baseprice
+    return baseprice, childString
