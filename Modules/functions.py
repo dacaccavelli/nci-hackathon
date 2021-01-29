@@ -114,7 +114,7 @@ def totalPrice(carList):
 
 
 def discountCalc(n1, n2):
-    discount = round(n1 - n1 * n2)
+    discount = round(n1 - n1 * n2, 2)
     return discount
 
 
